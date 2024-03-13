@@ -64,6 +64,7 @@ def local_xp():
 basis_qubits = spin_basis_1d(L, S="1/2")
 basis_qudits = spin_basis_1d(L, S="3/2")
 
+basis_combined = tensor_basis(basis_qubits, basis_qudits)
 
 
 
@@ -170,8 +171,8 @@ U2 = np.fliplr(np.eye(basis_qubits.Ns))  # for the qubits
 U4 = np.fliplr(np.eye(basis_qudits.Ns))  # for the qudits
 
 # for debug: cnacel the flip:
-U2 = (np.eye(basis_qubits.Ns))  # for the qubits
-U4 = (np.eye(basis_qudits.Ns))  # for the qudits
+# U2 = (np.eye(basis_qubits.Ns))  # for the qubits
+# U4 = (np.eye(basis_qudits.Ns))  # for the qudits
 
 # build electric hamiltonian:
 def H_E(h, flip=True):
