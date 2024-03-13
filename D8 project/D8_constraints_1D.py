@@ -42,7 +42,7 @@ def change_basis(A):
                                                                                             np.eye(4))
     return change_basis_left@A@change_basis_right
 
-# flip order of levels to fit with quspin convention
+# flip order of levels to fit with the quspin convention
 U2 = np.fliplr(np.eye(2**3))  # for the qubits
 U4 = np.fliplr(np.eye(4**3))  # for the qudits
 

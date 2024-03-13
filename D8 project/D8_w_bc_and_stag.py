@@ -1,3 +1,4 @@
+# D8 Hamiltonian for 4 sites in 1d
 # here we also include boundary interaction terms and change some signs to work in the staggered case
 # see notes version 4...
 
@@ -58,7 +59,7 @@ def local_xp():
 
 
 
-# %%
+
 # define QuSpin basis objects
 basis_qubits = spin_basis_1d(L, S="1/2")
 basis_qudits = spin_basis_1d(L, S="3/2")
@@ -67,7 +68,7 @@ basis_combined = tensor_basis(basis_qubits, basis_qudits)
 
 
 
-# %%
+
 # build global operations from local ones:
 def single_site_op(local_op: ndarray, site: int, base: spin_basis_1d):
     """
@@ -161,7 +162,7 @@ def XX(site: int):
 def XP(site: int):
     base = basis_qudits
     return single_site_op(local_xp(), site, base)
-
+# %%
 ############################  build hamiltonian ######################################
 # we build the qubit and qudit part separately.
 # BEFORE we combine them (!), we have to flip the basis order in each of them, to agree with the QuSpin conventions
@@ -294,24 +295,27 @@ plt.show()
 
 # %% check that H commutes with the constraints:
 import D8_constraints_1D as cr
-print(abs(H@cr.G0 - cr.G0@H).any())
-print(abs(H@cr.G1 - cr.G1@H).any())
-print(abs(H@cr.G2 - cr.G2@H).any())
-print(abs(H@cr.G3 - cr.G3@H).any())
+print("check that H Commutes with the 4 constraints:")
+print(not (abs(H@cr.G0 - cr.G0@H).any()))
+print(not (abs(H@cr.G1 - cr.G1@H).any()))
+print(not (abs(H@cr.G2 - cr.G2@H).any()))
+print(not (abs(H@cr.G3 - cr.G3@H).any()))
 
-# %% add the constarints as penalty
+# %% add the constraints as penalty
+
 lam = 10
 I = np.eye(basis_combined.Ns)
 H = H + lam*((cr.G0-I)@(cr.G0-I)+(cr.G1-I)@(cr.G1-I) + (cr.G2-I)@(cr.G2-I) + (cr.G3-I)@(cr.G3-I) )
 levels = np.linalg.eigvals(H)
 x = np.ones(np.size(levels))
-# x = np.arange(len(levels))
+
 levels = np.sort(levels)
-plt.figure()
+
 plt.scatter(x, np.real(levels), marker="_", s=9000)
 plt.grid(axis='y')
 plt.title("eigenvalues of H with constraints")
-# focus on the lowe energy sector
+
+# focus on the low energy sector
 plt.ylim([np.min(levels)-0.1*np.min(levels),np.min(levels)+1.1*lam])
 
 plt.show()
