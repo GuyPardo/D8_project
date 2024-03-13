@@ -35,7 +35,6 @@ def comm_mat(m, n):
     return np.eye(m * n)[w, :]
 
 
-
 def change_basis(A):
     change_basis_left = multi_kron(np.eye(4), comm_mat(
         2, 16), np.eye(4)) @ multi_kron(np.eye(2), comm_mat(2, 4), np.eye(32))
@@ -43,7 +42,7 @@ def change_basis(A):
                                                                                             np.eye(4))
     return change_basis_left@A@change_basis_right
 
-# flip order
+# flip order of levels to fit with quspin convention
 U2 = np.fliplr(np.eye(2**3))  # for the qubits
 U4 = np.fliplr(np.eye(4**3))  # for the qudits
 
