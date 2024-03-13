@@ -169,9 +169,6 @@ def XP(site: int):
 U2 = np.fliplr(np.eye(basis_qubits.Ns))  # for the qubits
 U4 = np.fliplr(np.eye(basis_qudits.Ns))  # for the qudits
 
-# for debug: cnacel the flip:
-# U2 = (np.eye(basis_qubits.Ns))  # for the qubits
-# U4 = (np.eye(basis_qudits.Ns))  # for the qudits
 
 # build electric hamiltonian:
 def H_E(h, flip=True):
