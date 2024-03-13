@@ -11,7 +11,6 @@ import matplotlib as mpl
 import D8_group_operators as go
 # mpl.use('TkAgg')
 import matplotlib.pyplot as plt
-import D8_constraints_1D as cr
 # configuration
 L = 3   # numer of links
 J = 1  # interaction strength
@@ -296,11 +295,27 @@ plt.grid(axis='y')
 plt.title("eigenvalues of H")
 plt.show()
 
-plt.imshow(abs(H@cr.G1 - cr.G1@H))
-plt.colorbar()
-plt.show()
-# %%
+# %% check that H commutes with the constraints:
+import D8_constraints_1D as cr
 print(abs(H@cr.G0 - cr.G0@H).any())
 print(abs(H@cr.G1 - cr.G1@H).any())
 print(abs(H@cr.G2 - cr.G2@H).any())
 print(abs(H@cr.G3 - cr.G3@H).any())
+
+# %% add the constarints as penalty
+lam = 10
+I = np.eye(basis_combined.Ns)
+H = H + lam*((cr.G0-I)@(cr.G0-I)+(cr.G1-I)@(cr.G1-I) + (cr.G2-I)@(cr.G2-I) + (cr.G3-I)@(cr.G3-I) )
+levels = np.linalg.eigvals(H)
+x = np.ones(np.size(levels))
+# x = np.arange(len(levels))
+levels = np.sort(levels)
+plt.figure()
+plt.scatter(x, np.real(levels), marker="_", s=9000)
+plt.grid(axis='y')
+plt.title("eigenvalues of H with constraints")
+# focus on the lowe energy sector
+plt.ylim([np.min(levels)-0.1*np.min(levels),np.min(levels)+1.1*lam])
+
+plt.show()
+
