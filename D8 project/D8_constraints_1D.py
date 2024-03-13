@@ -1,7 +1,7 @@
+# implement the additional constaints for the D8 matter eliminated formalism in 1D with 4 sites (3 links)
 from functools import reduce
-
 import numpy as np
-import D8_group_operators as go
+import D8_group_operators as go # all the theta operators are implemented here
 
 def multi_kron(*op_lst):
     return(reduce(np.kron, op_lst))
@@ -17,7 +17,7 @@ def W3(i):
 
 
 
-
+# different signs on different sites: becuase of staggering
 G0 = 1/2 * (W0(3) + W0(1)) + 1/2 * (W0(5) - W0(7))
 G1 = 1/2 * (W1(3) + W1(1)) - 1/2 * (W1(5) - W1(7))
 G2 = 1/2 * (W2(3) + W2(1)) + 1/2 * (W2(5) - W2(7))

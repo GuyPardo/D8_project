@@ -1,14 +1,11 @@
-import numpy as np
-
-# define group operators:
+# define group operators for the link hilbert space in D8 in the group element basis
 # basis order: {1, a, a^2, a^3, x, ax, a^2x, a^3x} = {1, -iy, -1, iy,  z, x, -z, -x}
-
+import numpy as np
 a = np.array([[0, -1], [1, 0]])
 x = np.array([[1, 0], [0, -1]])
 
 
 # build D matrices
-
 def D(i):
     p = i % 4
     q = int(i > 3)
@@ -16,8 +13,7 @@ def D(i):
     return(d_temp)
 
 
- #build theta matrices
-
+# build theta matrices
 def TL(i):
     TL_temp = np.zeros([8,8])
     for ii in range(8):
