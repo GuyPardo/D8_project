@@ -584,5 +584,3 @@ def HB(lambdaB, flip=True):
         full_HB = full_HB + 2*lambdaB.real * np.kron(H_qubits, H_qudits)
 
     return full_HB
-
-
