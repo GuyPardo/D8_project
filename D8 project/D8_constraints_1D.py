@@ -16,8 +16,7 @@ def W3(i):
     return multi_kron(np.eye(8),np.eye(8), go.TR(i).T)
 
 
-
-# different signs on different sites: becuase of staggering
+# different signs on different sites: because of staggering
 G0 = 1/2 * (W0(3) + W0(1)) + 1/2 * (W0(5) - W0(7))
 G1 = 1/2 * (W1(3) + W1(1)) - 1/2 * (W1(5) - W1(7))
 G2 = 1/2 * (W2(3) + W2(1)) + 1/2 * (W2(5) - W2(7))
