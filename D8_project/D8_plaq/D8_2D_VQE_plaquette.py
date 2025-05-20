@@ -20,7 +20,6 @@ importlib.reload(D8)
 
 import D8_group_operators as D8_op
 importlib.reload(D8_op)
-from D8_constraints_1D import multi_kron
 
 from quspin.basis import spin_basis_1d, tensor_basis, basis_int_to_python_int, spin_basis_general
 # configuration
