@@ -41,14 +41,14 @@ print("Hermiticity check:")
 print(scipy.linalg.ishermitian(H))
 
 # plot hamiltonian
-fig, axs = plt.subplots(1, 2)
-p1 = axs[0].imshow(np.real(H))
-p2 = axs[1].imshow(np.imag(H))
-fig.colorbar(p1)
-fig.colorbar(p2)
+# fig, axs = plt.subplots(1, 2)
+# p1 = axs[0].imshow(np.real(H))
+# p2 = axs[1].imshow(np.imag(H))
+# fig.colorbar(p1)
+# fig.colorbar(p2)
 
-axs[0].title.set_text('real(H)')
-axs[1].title.set_text('imag(H)')
+# axs[0].title.set_text('real(H)')
+# axs[1].title.set_text('imag(H)')
 
 # plot spectrum
 levels = np.linalg.eigvals(H)
