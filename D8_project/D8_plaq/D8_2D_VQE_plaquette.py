@@ -123,7 +123,7 @@ if __name__ == "__main__":
     M = 1  # mass constant
     J = 1  # interaction strength
     h = 1  # electric term strength (lambda_E in the notes)
-    lambdaB_values = np.linspace(0, 2, 11)  # Example: 11 values from 0 to 2
+    lambdaB_values = np.linspace(0.01, 2.5, 15) 
 
     all_eigenvalues = []
     all_eigenvectors = []
