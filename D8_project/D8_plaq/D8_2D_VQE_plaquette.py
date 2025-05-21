@@ -120,8 +120,8 @@ def comm(A,B):
     return A@B - B@A
 
 if __name__ == "__main__":
-    all_eigenvalues = []
-    all_eigenvectors = []
+    all_eigenvaluesJ = []
+    all_eigenvectorsJ = []
     span = np.linspace(0.01, 2.5, 15)
     M = 1  # mass constant
     h = 1  # electric term strength (lambda_E in the notes)
@@ -129,46 +129,52 @@ if __name__ == "__main__":
 
     for J in span:
         eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
-        all_eigenvalues.append(eigenvalues)
-        all_eigenvectors.append(eigenvectors)
+        all_eigenvaluesJ.append(eigenvalues)
+        all_eigenvectorsJ.append(eigenvectors)
 
     # Convert lists to NumPy arrays
-    all_eigenvalues = np.array(all_eigenvalues)
-    all_eigenvectors = np.array(all_eigenvectors)
+    all_eigenvalues1 = np.array(all_eigenvaluesJ)
+    all_eigenvectors1 = np.array(all_eigenvectorsJ)
 
     # Save both eigenvalues and eigenvectors to a .npz file
     np.savez("M_1_B_1_h_1_vs_J.npz", 
              J=span, 
-             eigenvalues=all_eigenvalues, 
-             eigenvectors=all_eigenvectors)
+             eigenvalues=all_eigenvaluesJ, 
+             eigenvectors=all_eigenvectorsJ)
     J=1
+    all_eigenvaluesM = []
+    all_eigenvectorsM = []
+
     for M in span:
         eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
-        all_eigenvalues.append(eigenvalues)
-        all_eigenvectors.append(eigenvectors)
+        all_eigenvaluesM.append(eigenvalues)
+        all_eigenvectorsM.append(eigenvectors)
 
     # Convert lists to NumPy arrays
-    all_eigenvalues = np.array(all_eigenvalues)
-    all_eigenvectors = np.array(all_eigenvectors)
+    all_eigenvaluesM = np.array(all_eigenvaluesM)
+    all_eigenvectorsM = np.array(all_eigenvectorsM)
 
     # Save both eigenvalues and eigenvectors to a .npz file
     np.savez("J_1_B_1_h_1_vs_M.npz", 
              M=span, 
-             eigenvalues=all_eigenvalues, 
-             eigenvectors=all_eigenvectors)
+             eigenvalues=all_eigenvaluesM, 
+             eigenvectors=all_eigenvectorsM)
     M=1
+    all_eigenvaluesh = []
+    all_eigenvectorsh = []
+
     for h in span:
         eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
-        all_eigenvalues.append(eigenvalues)
-        all_eigenvectors.append(eigenvectors)
+        all_eigenvaluesh.append(eigenvalues)
+        all_eigenvectorsh.append(eigenvectors)
 
     # Convert lists to NumPy arrays
-    all_eigenvalues = np.array(all_eigenvalues)
-    all_eigenvectors = np.array(all_eigenvectors)
+    all_eigenvaluesh = np.array(all_eigenvaluesh)
+    all_eigenvectorsh = np.array(all_eigenvectorsh)
 
     # Save both eigenvalues and eigenvectors to a .npz file
     np.savez("J_1_B_1_M_1_vs_h.npz", 
              h=span, 
-             eigenvalues=all_eigenvalues, 
-             eigenvectors=all_eigenvectors)
+             eigenvalues=all_eigenvaluesh, 
+             eigenvectors=all_eigenvectorsh)
     
