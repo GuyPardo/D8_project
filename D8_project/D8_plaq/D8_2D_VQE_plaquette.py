@@ -120,16 +120,14 @@ def comm(A,B):
     return A@B - B@A
 
 if __name__ == "__main__":
-    M = 1  # mass constant
-    J = 1  # interaction strength
-    h = 1  # electric term strength (lambda_E in the notes)
-    lambdaB_values = np.linspace(0.01, 2.5, 15) 
-
     all_eigenvalues = []
     all_eigenvectors = []
+    span = np.linspace(0.01, 2.5, 15)
+    M = 1  # mass constant
+    h = 1  # electric term strength (lambda_E in the notes)
+    lambdaB = 1
 
-    for lambdaB in lambdaB_values:
-        print(f"Computing for lambdaB={lambdaB}")
+    for J in span:
         eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
         all_eigenvalues.append(eigenvalues)
         all_eigenvectors.append(eigenvectors)
@@ -139,7 +137,38 @@ if __name__ == "__main__":
     all_eigenvectors = np.array(all_eigenvectors)
 
     # Save both eigenvalues and eigenvectors to a .npz file
-    np.savez("eigenvalues_and_vectors_vs_lambdaB.npz", 
-             lambdaB=lambdaB_values, 
+    np.savez("M_1_B_1_h_1_vs_J.npz", 
+             J=span, 
              eigenvalues=all_eigenvalues, 
              eigenvectors=all_eigenvectors)
+    J=1
+    for M in span:
+        eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
+        all_eigenvalues.append(eigenvalues)
+        all_eigenvectors.append(eigenvectors)
+
+    # Convert lists to NumPy arrays
+    all_eigenvalues = np.array(all_eigenvalues)
+    all_eigenvectors = np.array(all_eigenvectors)
+
+    # Save both eigenvalues and eigenvectors to a .npz file
+    np.savez("J_1_B_1_h_1_vs_M.npz", 
+             M=span, 
+             eigenvalues=all_eigenvalues, 
+             eigenvectors=all_eigenvectors)
+    M=1
+    for h in span:
+        eigenvalues, eigenvectors = compute_eigen_system(M, J, h, lambdaB)
+        all_eigenvalues.append(eigenvalues)
+        all_eigenvectors.append(eigenvectors)
+
+    # Convert lists to NumPy arrays
+    all_eigenvalues = np.array(all_eigenvalues)
+    all_eigenvectors = np.array(all_eigenvectors)
+
+    # Save both eigenvalues and eigenvectors to a .npz file
+    np.savez("J_1_B_1_M_1_vs_h.npz", 
+             h=span, 
+             eigenvalues=all_eigenvalues, 
+             eigenvectors=all_eigenvectors)
+    
