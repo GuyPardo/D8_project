@@ -122,7 +122,7 @@ def comm(A,B):
 if __name__ == "__main__":
     all_eigenvaluesJ = []
     all_eigenvectorsJ = []
-    span = np.linspace(0.01, 2.5, 15)
+    span = np.linspace(0.0001, 0.2, 12)
     M = 1  # mass constant
     # h = 1  # electric term strength (lambda_E in the notes)
     J = 1
