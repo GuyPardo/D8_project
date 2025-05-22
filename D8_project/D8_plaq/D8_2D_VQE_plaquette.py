@@ -138,7 +138,7 @@ if __name__ == "__main__":
     all_eigenvectors1 = np.array(all_eigenvectorsJ)
 
     # Save both eigenvalues and eigenvectors to a .npz file
-    np.savez("M_1_B_1_h_1_vs_J.npz", 
+    np.savez("small_l.npz", 
              J=span, 
              eigenvalues=all_eigenvaluesJ, 
              eigenvectors=all_eigenvectorsJ)
